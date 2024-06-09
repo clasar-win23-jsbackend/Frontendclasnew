@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Frontendclasnew.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+    @rendermode InteractiveServer
+
+    <nav>
+        <NavLink href="Account/Manage" Match="NavLinkMatch.All" class="btn-theme"><i class="fa-solid fa-gear"></i>Account details</NavLink>
+        <NavLink class="btn-theme" href="Account/Manage/ChangePassword">Password</NavLink>
+        <NavLink  href=""><i class="fa-solid fa-arrow-right-from-bracket"></i><span> Sign out </span></NavLink>
+    </nav>
+   
+   
+  
+
+  
+
+
+
+@code {
+ 
+
+
+}

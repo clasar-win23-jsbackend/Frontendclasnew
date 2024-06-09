@@ -1,0 +1,129 @@
+.account-details {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 150px;
+    margin-bottom: 70px;
+
+
+    .container {
+        display: flex;
+
+
+        aside {
+            border-right: 1px solid #E2E5F1;
+            padding-right: 50px;
+            margin-left: 200px;
+
+            .profile-info {
+                margin: 10px;
+                text-align: center;
+                width: 200px;
+
+                h5 {
+                    margin-top: 15px;
+                    margin-bottom: 0;
+                }
+
+                img {
+                    margin-top: 100px;
+                    height: 200px;
+                    justify-content: center;
+                    border-radius: 50%;
+                }
+            }
+
+            nav {
+                margin-top: 50px;
+                text-align: left;
+
+                a {
+                    margin: 10px 0;
+                    text-align: left;
+                    justify-content: flex-start;
+                }
+            }
+
+            .btn-theme {
+                text-align: left;
+                justify-content: flex-start;
+            }
+        }
+    }
+
+    .content {
+        padding-left: 100px;
+        display: grid;
+        margin-top: 100px;
+        width: 500px;
+
+        .form-button {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .form-basic {
+            h5 {
+                color: #6366F1;
+            }
+
+            .form-content {
+                margin-top: 40px;
+                display: grid;
+                gap: 20px;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "firstname lastname" "email phone" "bio bio" "confirmpassword confirmpassword" "terms terms" "signup signup";
+
+
+
+                #form-firstname {
+                    grid-area: firstname;
+                }
+
+                #form-lastname {
+                    grid-area: lastname;
+                }
+
+                #form-email {
+                    grid-area: email;
+                }
+
+                #form-phone {
+                    grid-area: phone;
+                }
+
+                #form-bio {
+                    grid-area: bio;
+                    height: 200px;
+                }
+
+                #form-terms {
+                    grid-area: terms;
+                }
+
+                #submit-signup {
+                    grid-area: signup;
+                }
+
+                .form-button {
+                    display: flex;
+                    gap: 10px;
+                }
+            }
+
+            border-bottom: 1px solid #E2E5F1;
+        }
+
+        .form-address {
+            margin-top: 40px;
+
+            h5 {
+                color: #6366F1;
+            }
+
+            .form-content {
+                padding-bottom: 40px;
+            }
+        }
+    }
+}

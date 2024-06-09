@@ -1,0 +1,58 @@
+﻿
+@attribute [StreamRendering]
+
+
+@if(user == null)
+{
+    <p>Loading....</p>
+}
+else
+{
+
+    <section class="account-profile">
+
+        <div class="profile">
+            <div class="profile-image">
+                <img src="/images/uploads/profiles/@user.ProfileImg" alt="@user.FirstName @user.LastName" />
+                <EditForm enctype="multipart/form-data" method="post">
+                    <InputFile id="imageUploader" type="file" name="file" hidden />
+                    <label for="imageUploader" class="btn-circle-sm"><i class="fa-solid fa-arrows-rotate"></i> </label>>
+                </EditForm>
+            </div>
+
+            <div class="profile-info">
+                <h3 class="displayname">@user.FirstName @user.LastName</h3>
+                <p>@user.Email</p>
+            </div>
+
+           
+
+
+        </div>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+    </section>
+
+}
+
+
+@code {
+
+    private ApplicationUser user = default!;
+
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserManager.GetUserAsync(HttpContext.User) ?? null!;
+
+
+
+    }
+  
+
+}

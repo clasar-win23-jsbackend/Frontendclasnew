@@ -1,0 +1,50 @@
+﻿
+<header>
+    <div class="container">
+        <a id="logo" class="logoNew" href="/"><img src="/images/others/siliconicon.svg"></a>
+        <div id="menu">
+            <nav>
+                <NavLink href="" Match="NavLinkMatch.All">Overview</NavLink>
+                <NavLink href="/#features">Features</NavLink>
+                <AuthorizeView>
+                    <Authorized>
+                        <NavLink href="/courses">Courses</NavLink>
+                        <NavLink href="/details">Account details</NavLink>
+                    </Authorized>
+                </AuthorizeView>
+                <NavLink class="menu-link" asp-controller="Contact" asp-action="Index">Contact</NavLink>
+            </nav>
+        </div>
+        <div class="btn-switch">
+            <label>Light</label>
+            <label class="switch" for="switch-mode">
+                <input type="checkbox" id="switch-mode" />
+                <div class="slider round"></div>
+            </label>
+            <label>Dark</label>
+        </div>
+        <div class="account-buttons">
+            <AuthorizeView>
+                <Authorized>
+                    <a class="btn-theme" asp-controller="Auth" asp-action="SignUp"><i class="fa-regular fa-user"></i><span> Sign up </span></a>
+                    <a class="btn-theme" asp-controller="Auth" asp-action="SignOut"><i class="fa-regular fa-user"></i><span> Sign out </span></a>
+                    <div class="profile">
+                        <div class="profile-image">
+                            <a href="/account/details">
+                                <img src="/images/uploads/profiles/avatar.jpg" />
+                            </a>
+                        </div>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <a class="btn-gray" href="/signin"><i class="fa-solid fa-arrow-right-to-bracket"></i><span> Sign in </span></a>
+                    <a class="btn-theme" href="signup"><i class="fa-regular fa-user"></i><span> Sign up </span></a>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+        <button class="btn-mobile">
+            <i class="fa-regular fa-bars"></i>
+        </button>
+    </div>
+</header>
+
