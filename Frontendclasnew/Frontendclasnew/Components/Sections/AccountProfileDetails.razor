@@ -1,4 +1,6 @@
-﻿
+﻿@using System.Net.Http.Headers
+
+
 @attribute [StreamRendering]
 
 
@@ -14,9 +16,9 @@ else
         <div class="profile">
             <div class="profile-image">
                 <img src="/images/uploads/profiles/@user.ProfileImg" alt="@user.FirstName @user.LastName" />
-                <EditForm enctype="multipart/form-data" method="post">
-                    <InputFile id="imageUploader" type="file" name="file" hidden />
-                    <label for="imageUploader" class="btn-circle-sm"><i class="fa-solid fa-arrows-rotate"></i> </label>>
+                <EditForm Model="@uploadModel" OnValidSubmit="HandleProfileUpload">
+                   <InputFile id="fileUploader" OnChange="HandleFileSelected" hidden />
+                    <label for="fileUploader" class="btn-circle-sm"><i class="fa-solid fa-arrows-rotate"></i> </label>>
                 </EditForm>
             </div>
 
@@ -38,20 +40,49 @@ else
 
 @code {
 
-    private ApplicationUser user = default!;
+    [Parameter]
 
+    public ApplicationUser user { get; set; } = default!;
+    private MultipartFormDataContent uploadModel = new MultipartFormDataContent();
+    private IBrowserFile? selectedFile;
 
     [CascadingParameter]
     private HttpContext HttpContext { get; set; } = default!;
 
+    
 
-
-    protected override async Task OnInitializedAsync()
+    private void HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+    }
+    private async Task LoadUserDataAsync()
     {
         user = await UserManager.GetUserAsync(HttpContext.User) ?? null!;
+    }
 
+    public async Task HandleProfileUpload()
+    {
+        if (selectedFile != null)
+        {
+            using var content = new MultipartFormDataContent();
+            var fileContent = new StreamContent(selectedFile.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(selectedFile.ContentType);
+            content.Add(fileContent, "file", selectedFile.Name);
 
-
+            try
+            {
+                var response = await Http.PostAsync("FILEPROVIDER_UPLOAD_PROFILE_URI", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    await LoadUserDataAsync();
+                    StateHasChanged();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
     }
   
 

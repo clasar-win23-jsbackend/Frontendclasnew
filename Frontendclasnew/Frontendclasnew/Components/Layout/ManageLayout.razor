@@ -7,7 +7,7 @@
 
 
         <aside>
-            <Frontendclasnew.Components.Sections.AccountProfileDetails/>
+           <Frontendclasnew.Components.Sections.AccountProfileDetails user="user" />
             <ManageNavMenu />
 
         </aside>
@@ -20,7 +20,26 @@
 
 
 
+@code{
 
+    [Parameter]
+
+    public ApplicationUser user { get; set; } = default!;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUserDataAsync();
+    }
+
+    private async Task LoadUserDataAsync()
+    {
+        user = await UserManager.GetUserAsync(HttpContext.User) ?? null!;
+    }
+
+}
 
 
 
